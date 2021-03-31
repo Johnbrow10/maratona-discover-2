@@ -21,6 +21,9 @@ routes.get("/", (req, res) => {
 routes.get("/job", (req, res) => {
   return res.render(views + "job");
 });
+routes.post("/job", (req, res) => {
+  console.log(req.body);
+});
 routes.get("/job/edit", (req, res) => {
   return res.render(views + "job-edit");
 });
