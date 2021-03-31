@@ -52,7 +52,7 @@ const Job = {
           ...job,
           remaining,
           status,
-          budget: profile["value-hour"] * job["total-hours"],
+          budget: Profile.data["value-hour"] * job["total-hours"],
         };
       });
 
@@ -62,7 +62,7 @@ const Job = {
       //  gambiarra linda kkkkk e para achar um id dependendo da posição do array
       const lastId = Job.data[Job.data.length - 1]?.id || 1;
 
-      jobs.push({
+      Job.data.push({
         id: lastId + 1,
         name: req.body.name,
         "daily-hours": req.body["daily-hours"],
