@@ -34,6 +34,19 @@ const jobs = [
 
 //  req e res
 routes.get("/", (req, res) => {
+  const updateJobs = jobs.map((job) => {
+    // Calculo de dias que falta
+    // ajustes no job
+
+    const remainingDays = (job["total-hours"] / job["daily-hours"]).toFixed();
+
+    const createdDate = new Date(job.created_at);
+    const dueDay = createdDate.getDate() + Number(remainingDays);
+    const dueDate = createdDate.setDate
+
+    return job;
+  });
+
   return res.render(views + "index", { jobs });
 });
 routes.get("/job", (req, res) => {
