@@ -20,7 +20,7 @@ const jobs = [
     id: 1,
     name: "Pizzaria Gulloso",
     "daily-hours": 2,
-    "total-hours": 60,
+    "total-hours": 2,
     created_at: Date.now(),
   },
 
