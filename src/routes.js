@@ -19,6 +19,28 @@ const Profile = {
     index(req, res) {
       return res.render(views + "profile", { profile: Profile.data });
     },
+    update(req, res) {
+      // req.body para pegar os dados
+      const data = req.body;
+
+      //  definir quanbtas semanas tem um ano: 52
+      const weeksPerYar = 52;
+
+      //  remover as semanas de ferias do ano, para pegar quantas semanas tem em um mes
+      const weeksPeerMonth = (weeksPerYar - data["vacation-per-year"]) / 12;
+
+      // quantas horas por semana estou trabalhando
+      const weekTotalHours = data["hours-per-day"] * data["days-per-week"];
+
+      // total de horas trabalhadas no mes
+      const monthlyTotalHours = weekTotalHours * weeksPeerMonth;
+
+      // Qual sera meu valor por hora
+      data["value-hour"] = data["monthly-budget"] / monthlyTotalHours;
+
+      Profile.data = data;
+      return res.redirect("/profile");
+    },
   },
 };
 
@@ -108,5 +130,6 @@ routes.get("/job/edit", (req, res) => {
   return res.render(views + "job-edit");
 });
 routes.get("/profile", Profile.controllers.index);
+routes.post("/profile", Profile.controllers.update);
 
 module.exports = routes;
