@@ -53,7 +53,6 @@ const Job = {
       "daily-hours": 2,
       "total-hours": 2,
       created_at: Date.now(),
-
     },
 
     {
@@ -62,7 +61,6 @@ const Job = {
       "daily-hours": 3,
       "total-hours": 47,
       created_at: Date.now(),
-
     },
   ],
 
@@ -104,6 +102,10 @@ const Job = {
 
       const job = Job.data.find((job) => Number(job.id) === Number(jobId));
 
+      if (!job) {
+        return res.send("Job nots Found!");
+      }
+
       job.budget = Job.services.calculateBudget(
         job,
         Profile.data["value-hour"]
@@ -136,12 +138,11 @@ const Job = {
 
 //  req e res
 routes.get("/", Job.controllers.index);
-
 routes.get("/job", Job.controllers.create);
-
 routes.post("/job", Job.controllers.save);
-
 routes.get("/job/:id", Job.controllers.show);
+routes.post("/job/:id", Job.controllers.update);
+
 routes.get("/profile", Profile.controllers.index);
 routes.post("/profile", Profile.controllers.update);
 
