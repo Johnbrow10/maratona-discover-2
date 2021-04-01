@@ -53,6 +53,7 @@ const Job = {
       "daily-hours": 2,
       "total-hours": 2,
       created_at: Date.now(),
+
     },
 
     {
@@ -61,6 +62,7 @@ const Job = {
       "daily-hours": 3,
       "total-hours": 47,
       created_at: Date.now(),
+
     },
   ],
 
@@ -74,7 +76,7 @@ const Job = {
           ...job,
           remaining,
           status,
-          budget: Profile.data["value-hour"] * job["total-hours"],
+          budget: Job.services.calculateBudget(job, Profile.data["value-hour"]),
         };
       });
 
@@ -97,6 +99,18 @@ const Job = {
     create(req, res) {
       return res.render(views + "job");
     },
+    show(req, res) {
+      const jobId = req.params.id;
+
+      const job = Job.data.find((job) => Number(job.id) === Number(jobId));
+
+      job.budget = Job.services.calculateBudget(
+        job,
+        Profile.data["value-hour"]
+      );
+
+      return res.render(views + "job-edit", { job });
+    },
   },
 
   services: {
@@ -116,6 +130,7 @@ const Job = {
 
       return dayDiff;
     },
+    calculateBudget: (job, valueHour) => valueHour * job["total-hours"],
   },
 };
 
@@ -126,9 +141,7 @@ routes.get("/job", Job.controllers.create);
 
 routes.post("/job", Job.controllers.save);
 
-routes.get("/job/edit", (req, res) => {
-  return res.render(views + "job-edit");
-});
+routes.get("/job/:id", Job.controllers.show);
 routes.get("/profile", Profile.controllers.index);
 routes.post("/profile", Profile.controllers.update);
 
