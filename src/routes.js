@@ -113,6 +113,32 @@ const Job = {
 
       return res.render(views + "job-edit", { job });
     },
+    update(req, res) {
+      const jobId = req.params.id;
+
+      const job = Job.data.find((job) => Number(job.id) === Number(jobId));
+
+      if (!job) {
+        return res.send("Job nots Found!");
+      }
+
+      const updatedJob = {
+        ...job,
+        name: req.body.name,
+        "total-hours": req.body["total-hours"],
+        "daily-hours": req.body["daily-hours"],
+      };
+
+      Job.data = Job.data.map((job) => {
+        if (Number(job.id) === Number(jobId)) {
+          job = updatedJob;
+        }
+
+        return job;
+      });
+
+      res.redirect("/job/" + jobId);
+    },
   },
 
   services: {
