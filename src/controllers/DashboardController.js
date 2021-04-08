@@ -18,6 +18,6 @@ module.exports = {
       };
     });
 
-    return res.render("index", { jobs: updateJobs });
+    return res.render("index", { jobs: updateJobs, profile: profile });
   },
 };
