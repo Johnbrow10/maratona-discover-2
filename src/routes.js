@@ -2,7 +2,7 @@ const express = require("express");
 
 const routes = express.Router();
 
-const views = __dirname + "/views/";
+
 
 const Profile = {
   data: {
@@ -17,7 +17,7 @@ const Profile = {
   },
   controllers: {
     index(req, res) {
-      return res.render(views + "profile", { profile: Profile.data });
+      return res.render( "profile", { profile: Profile.data });
     },
     update(req, res) {
       // req.body para pegar os dados
@@ -78,7 +78,7 @@ const Job = {
         };
       });
 
-      return res.render(views + "index", { jobs: updateJobs });
+      return res.render( "index", { jobs: updateJobs });
     },
     save(req, res) {
       //  gambiarra linda kkkkk e para achar um id dependendo da posição do array
@@ -95,7 +95,7 @@ const Job = {
       return res.redirect("/");
     },
     create(req, res) {
-      return res.render(views + "job");
+      return res.render( "job");
     },
     show(req, res) {
       const jobId = req.params.id;
@@ -111,7 +111,7 @@ const Job = {
         Profile.data["value-hour"]
       );
 
-      return res.render(views + "job-edit", { job });
+      return res.render( "job-edit", { job });
     },
     update(req, res) {
       const jobId = req.params.id;
