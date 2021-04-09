@@ -32,7 +32,10 @@
           <img id="logo" src="/images/logo.svg" alt="Logo" />
           <span id="notification">
             <img src="/images/alert-octagon.svg" alt="Alerta" />
-            Você tem 2 horas livres no seu dia
+            <!-- Um if para verificar se tem horas livres no seu dia -->
+            <% if(freeHours <= 0) { %> Vocẽ não tem horas livres <% }else { %>
+            Você tem <%= freeHours %> horas livres no seu dia <% } %>
+         
           </span>
           <a href="/profile" id="avatar-profile">
             <p><%= profile.name %> <span>Ver perfil</span></p>
