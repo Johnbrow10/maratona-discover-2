@@ -13,4 +13,12 @@ Database.exec(`CREATE TABLE profile (
     value-hour INT
 )`);
 
+Database.exec(`CREATE TABLE jobs(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    daily-hours INT,
+    total-hours INT,
+    created-at DATETIME
+)`);
+
 Database.close();
