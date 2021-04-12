@@ -38,4 +38,28 @@ Database.run(`INSERT INTO profile(
     4,
 );`);
 
+Database.run(`INSERT INTO jobs(
+    name,
+    daily_hours,
+    total_hours,
+    created_at,
+) VALUES(
+    "Pizzaria Guloso",
+    2,
+    1,
+    16175143376018
+);`);
+
+Database.run(`INSERT INTO jobs(
+    name,
+    daily_hours,
+    total_hours,
+    created_at,
+)VALUES(
+    "One two Project",
+    3,
+    47,
+    16175143376018
+);`);
+
 Database.close();
