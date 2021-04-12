@@ -1,9 +1,10 @@
-const Database = require("config");
-const Profile = require("../model/Profile");
+const Database = require("./config");
 
-Database();
+const initDb = {
+  async init() {
+    const db = await Database();
 
-Database.exec(`CREATE TABLE profile (
+    await db.exec(`CREATE TABLE profile (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     avatar TEXT,
@@ -14,7 +15,7 @@ Database.exec(`CREATE TABLE profile (
     value_hour INT
 )`);
 
-Database.exec(`CREATE TABLE jobs(
+    await db.exec(`CREATE TABLE jobs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     daily_hours INT,
@@ -22,44 +23,48 @@ Database.exec(`CREATE TABLE jobs(
     created_at DATETIME
 )`);
 
-Database.run(`INSERT INTO profile(
+    await db.run(`INSERT INTO profile (
     name,
     avatar,
     monthly_budget,
     days_per_week,
     hours_per_day,
-    vacation_per_day,
-) VALUES(
+    vacation_per_day
+) VALUES (
     "Johnbrow",
     "https://github.com/johnbrow10.png",
     3000,
     5,
     5,
-    4,
-);`);
+    4
+)`);
 
-Database.run(`INSERT INTO jobs(
+    await db.run(`INSERT INTO jobs (
     name,
     daily_hours,
     total_hours,
-    created_at,
-) VALUES(
+    created_at
+) VALUES (
     "Pizzaria Guloso",
     2,
     1,
     16175143376018
-);`);
+)`);
 
-Database.run(`INSERT INTO jobs(
+    await db.run(`INSERT INTO jobs (
     name,
     daily_hours,
     total_hours,
-    created_at,
-)VALUES(
+    created_at
+) VALUES (
     "One two Project",
     3,
     47,
     16175143376018
-);`);
+)`);
 
-Database.close();
+    await db.close();
+  },
+};
+
+initDb.init();
