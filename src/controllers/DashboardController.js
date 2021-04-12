@@ -2,9 +2,9 @@ const Job = require("../model/Job");
 const Profile = require("../model/Profile");
 const JobUtils = require("../utils/JobUtils");
 module.exports = {
-  index(req, res) {
+  async index(req, res) {
     const jobs = Job.get();
-    const profile = Profile.get();
+    const profile = await Profile.get();
 
     let statusCount = {
       progress: 0,
@@ -23,7 +23,10 @@ module.exports = {
 
       // Dependendo se o status tiver como progress ele ira adicionar
       // no jobTotalHours as horas disponiveis para trabalhar no dia
-      if (status == "progress") jobTotalHours += Number(job["daily-hours"]);
+      jobTotalHours =
+        status == "progress"
+          ? (jobTotalHours += Number(job["daily-hours"]))
+          : jobTotalHours;
 
       return {
         ...job,
