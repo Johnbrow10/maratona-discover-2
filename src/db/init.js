@@ -11,7 +11,7 @@ const initDb = {
     monthly_budget INT ,
     days_per_week INT,
     hours_per_day INT,
-    vacation_per_day INT,
+    vacation_per_year INT,
     value_hour INT
 )`);
 
@@ -29,7 +29,7 @@ const initDb = {
     monthly_budget,
     days_per_week,
     hours_per_day,
-    vacation_per_day,
+    vacation_per_year,
     value_hour
 ) VALUES (
     "Johnbrow",
@@ -40,6 +40,7 @@ const initDb = {
     4,
     70
 )`);
+
 
     await db.run(`INSERT INTO jobs (
     name,
