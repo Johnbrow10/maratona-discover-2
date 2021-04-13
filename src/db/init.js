@@ -51,7 +51,7 @@ const initDb = {
     "Pizzaria Guloso",
     2,
     1,
-    16175143376018
+    1617514376018
 )`);
 
     await db.run(`INSERT INTO jobs (
@@ -63,7 +63,7 @@ const initDb = {
     "One two Project",
     3,
     47,
-    16175143376018
+    1617514376018
 )`);
 
     await db.close();
